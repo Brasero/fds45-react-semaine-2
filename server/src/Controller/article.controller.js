@@ -1,7 +1,7 @@
 const fs = require("fs")
 
 
-const articleFilePath = "src/Data/article.json"
+const articleFilePath = __dirname+"/../Data/article.json"
 function getAll(req,res) {
     const JSONdata = fs.readFileSync(articleFilePath).toString()
     const data = JSON.parse(JSONdata)

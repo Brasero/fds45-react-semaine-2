@@ -17,6 +17,28 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.raw())
 
+app.use((req,res,next) => {
+    const method = req.method
+    const body = {...req.body}
+    const params =  {...req.params}
+    const path = req.path
+
+    console.group()
+        console.info(`Chemin: ${path}`)
+        console.log(`METHOD : ${method}`)
+        console.log(`Charge utile : `)
+        Object.keys(body).map((key) => {
+            console.log(`    ${key} : ${body[key]}`)
+        })
+        console.log(`Params : `)
+        Object.keys(params).map((key) => {
+            console.log(`    ${key} : ${params[key]}`)
+        })
+        console.log("--------------------------------")
+    console.groupEnd()
+    next()
+})
+
 app.use('/', router)
 
 
